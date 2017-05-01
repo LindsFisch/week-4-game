@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Roommate Rumble</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script type="text/javascript" src="assets/javascript/game.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<img src="assets/images/gglogo.png">
+		<h2>Roommate Rumble</h2>
+		<p>The ladies just discovered that there is only ONE slice of cheesecake left. Select your favorite Golden Girl and take the dessert skirmish out on the lanai!</p>
+	</header>
+	<section class="container-fluid character">
+		<h3>Your Golden Girl</h3>
+		<div id="chars">
+			<div class="imgbox choice blanche">
+				<p>Blanche Devereaux</p>
+				<img src="assets/images/blanche.jpg" alt="Blanche" value="blanche">
+				<p>HP</p>
+			</div>
+			<div class="imgbox choice sophia">
+				<p>Sophia Petrillo</p>
+				<img src="assets/images/sophia.jpg" alt="Sophia" value="sophia">
+				<p>HP</p>
+			</div>
+			<div class="imgbox choice dorothy">
+				<p>Dorothy Zbornak</p>
+				<img src="assets/images/dorothy.jpg" alt="Dorothy" value="dorothy">
+				<p>HP</p>
+			</div>
+			<div class="imgbox choice rose">
+				<p>Rose Nylund</p>
+				<img src="assets/images/rose.jpg" alt="Rose" value="rose">
+				<p>HP</p>
+			</div>
+		</div>
+	</section>
+	<section class="container-fluid enemy">
+		<h3>Girls standing between you and cheesecake</h3>
+		<div id="enemies">
+		</div>
+	</section>
+	<section class="container-fluid arena">
+		<h3>The Lanai</h3>
+		<div id="lanai">	
+		</div>
+		<p id="stat"></p>
+		<button class="btn btn-default">Attack</button>	
+	</section>
+
+
+</body>
+</html>

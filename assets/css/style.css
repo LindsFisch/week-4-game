@@ -1,0 +1,22 @@
+.imgbox {
+	background: pink;
+	text-align: center;
+	width: 200px;
+	border: 2px ridge blue;
+	margin: 0 20px;
+}
+
+.imgbox > img {
+	max-width: 175px;
+	height: auto;
+}
+
+.imgbox p {
+	margin: 5px;
+}
+
+#chars {
+	display: inline-flex;
+	width: 100%;
+	margin: 0 auto;
+}
