@@ -23,15 +23,30 @@ var options = {
 	}
 }
 
-var player ="";
-var opponent ="";
+var userChoice;
+var player;
+var opponent;
 
+
+function initializeGame () {
+	userChoice = false;
+	enemyChoice = false;
+	player = "";
+	opponent = "";
+
+}
+
+initializeGame();
 //first pick
 $(".choice").on("click", function () {
-	if (opponent === "") {
-		player = options.($(this).attr("value"));
-		console.log(player);
+	if (userChoice === false && enemyChoice === false) {
+		player = options[$(this).data("gg-type")];
+		$(this).appendTo("#arena");
+		userChoice = true;
+	} else if (userChoice === true && enemyChoice === false) {
+
 	}
+
 })
 });
 
