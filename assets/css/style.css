@@ -11,11 +11,11 @@
 	height: auto;
 }
 
-.imgbox p {
+.imgbox span, .imgbox p {
 	margin: 5px;
 }
 
-#chars {
+#chars, #enemies, #outside {
 	display: inline-flex;
 	width: 100%;
 	margin: 0 auto;

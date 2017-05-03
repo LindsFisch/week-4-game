@@ -2,22 +2,22 @@ $(document).ready(function() {
 
 var options = {
 	blanche: {
-		health: 6,
+		health: 160,
 		attack: 7,
 		counter: 8
 	},
 	sophia: {
-		health: 1,
+		health: 125,
 		attack: 2,
 		counter: 3
 	},
 	dorothy: {
-		health: 4,
+		health: 140,
 		attack: 5,
 		counter: 6
 	},
 	rose: {
-		health: 9,
+		health: 95,
 		attack: 10,
 		counter: 2
 	}
@@ -27,6 +27,12 @@ var userChoice;
 var enemyChoice;
 var player;
 var opponent;
+var enemyCount;
+var playerHp;
+var opponentHp;
+var playerAttack;
+var playerName;
+var opponentName;
 
 
 function initializeGame () {
@@ -34,6 +40,8 @@ function initializeGame () {
 	enemyChoice = false;
 	player = "";
 	opponent = "";
+	enemyCount = 3;
+	$("#stat").empty();
 
 }
 
@@ -44,16 +52,20 @@ $(".choice").on("click", function () {
 	//pick user player
 	if (userChoice === false && enemyChoice === false) {
 		player = options[$(this).data("gg-type")];
-		$(this).appendTo("#arena");
+		playerName = $(this).data("gg-type");
+		$(this).appendTo("#lanai");
 		$("#chars > .imgbox").appendTo("#enemies");
 		userChoice = true;
-		console.log(player);
+		playerHp = player.health;
+		playerAttack = player.attack
 	//pick opponent
 	} else if (userChoice === true && enemyChoice === false) {
 		opponent = options[$(this).data("gg-type")];
-		$(this).appendTo("#lanai");
+		opponentName = $(this).data("gg-type");
+		$(this).appendTo("#lanaiTwo");
 		enemyChoice = true;
-		console.log(opponent);
+		opponentHp = opponent.health;
+		$("#stat").empty();
 	}
 
 })
@@ -61,28 +73,50 @@ $(".choice").on("click", function () {
 //click to attack
 $(".attack").on("click", function () {
 	//continue to attack
-	if (player.health > 0 && opponent.health > 0) {
+	if (playerHp > 0 && opponentHp > 0) {
+		//change player hp based on opp counter
+		playerHp -= opponent.counter;
+
+		//var hp = 999;
+		//var item = $("div[data-gg-type='dorothy'] span")
+		//item.text("888");
+		//console.log(item);
+		//console.log(item.text());
+		$("#" + playerName+ "").html(playerHp);
+
+		//change opp hp based on player attack
+		opponentHp -= playerAttack;
+
+		//increase player attack power
+		playerAttack += player.attack;
+
+		$("#stat").html("<p>You attacked " + opponentName.toUpperCase() + " for " + playerAttack + " damage.</p>" +
+		"<p>" + opponentName.toUpperCase() + " attacked you back for " + opponent.counter + " damage.</p>")
+
 
 	//player won - new opponent
-	} else if (player.health > 0 && opponent.health <= 0) {
-
-
-		//if there are opponents remaining
-		if () {
-
-		//if there are no opponents remaining	
+	} else if (playerHp > 0 && opponentHp <= 0) {
+		//if there are no opponents remaining
+		if (enemyCount === 0) {
+			$("#stat").html("<h2> YOU WIN! </h2>");
+			
+		//if there are opponents remaining	
 		} else {	
-
+			$("#stat").html("<p>You beat " + opponentName.toUpperCase() + ". Pick a new opponent!</p>");
+			$("#lanaiTwo").empty();
+			enemyCount--;
+			console.log(enemyCount);
+			enemyChoice = false;
 
 		//create restart button
 		}
 
 	//opponent won
-	} else if (player.health < 0 && opponent.health > 0){
+	} else if (playerHp < 0 && opponentHp > 0){
+		$("#stat").html("<h2> You Lose! " + opponentName.toUpperCase() + " ate the cheesecake right in front of YOUR FACE!</h2>");
 
 	}
-	console.log(player.health);
-	console.log(opponent.health);
+
 
 })
 
