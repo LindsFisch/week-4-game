@@ -15,27 +15,27 @@
 <body>
 	<header>
 		<img src="assets/images/gglogo.png">
-		<h2>Roommate Rumble</h2>
-		<p>The ladies just discovered that there is only ONE slice of cheesecake left. Select your favorite Golden Girl and take the dessert skirmish out on the lanai!</p>
 	</header>
 	<section class="container-fluid character">
+		<h2>Roommate Rumble</h2>
+		<p>The ladies just discovered that there is only ONE slice of cheesecake left. Select your favorite Golden Girl and take the dessert skirmish out on the lanai!</p>
 		<div id="chars">
-			<div class="imgbox choice" data-gg-type="blanche">
+			<div class="imgbox choice" id="bOne" data-gg-type="blanche">
 				<p>Blanche Devereaux</p>
 				<img src="assets/images/blanche.jpg" alt="Blanche">
 				<span id ="blanche">HP</span>
 			</div>
-			<div class="imgbox choice" data-gg-type="sophia">
+			<div class="imgbox choice" id="sOne" data-gg-type="sophia">
 				<p>Sophia Petrillo</p>
 				<img src="assets/images/sophia.jpg" alt="Sophia">
 				<span id="sophia">HP</span>
 			</div>
-			<div class="imgbox choice" data-gg-type="dorothy">
+			<div class="imgbox choice" id="dOne" data-gg-type="dorothy">
 				<p>Dorothy Zbornak</p>
 				<img src="assets/images/dorothy.jpg" alt="Dorothy">
 				<span id="dorothy">HP</span>
 			</div>
-			<div class="imgbox choice" data-gg-type="rose">
+			<div class="imgbox choice" id="rOne" data-gg-type="rose">
 				<p>Rose Nylund</p>
 				<img src="assets/images/rose.jpg" alt="Rose">
 				<span id="rose">HP</span>
@@ -52,12 +52,15 @@
 		<div id="outside">
 		<div id="lanai">	
 		</div>
-		<div> VS </div>
+		<div> 
+			<img id="vs" src="assets/images/vs.png">
+		</div>
 		<div id="lanaiTwo">
 		</div>
 		<p id="stat"></p>
 		</div>
-		<button type="button" class="btn btn-danger attack">Attack</button>	
+		<button type="button" class="btn btn-danger attack">Attack</button>
+		<button type = "button" class="btn btn-primary reset">Play Again</button>	
 	</section>
 
 

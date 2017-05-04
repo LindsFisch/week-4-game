@@ -1,3 +1,13 @@
+header {
+	margin: auto;
+	width: 50%;
+}
+
+.character h2, .character p{
+	text-align: center;
+}
+
+
 .imgbox {
 	background: pink;
 	text-align: center;
@@ -19,4 +29,14 @@
 	display: inline-flex;
 	width: 100%;
 	margin: 0 auto;
+}
+
+.reset {
+	visibility: hidden;
+}
+
+#vs {
+	visibility: hidden;
+	width: 75px;
+	margin: 75px 5px 0 5px;
 }

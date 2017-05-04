@@ -33,6 +33,8 @@ var opponentHp;
 var playerAttack;
 var playerName;
 var opponentName;
+var clone;
+
 
 
 function initializeGame () {
@@ -42,6 +44,7 @@ function initializeGame () {
 	opponent = "";
 	enemyCount = 3;
 	$("#stat").empty();
+	clone = $("#rOne").clone();
 
 }
 
@@ -54,17 +57,21 @@ $(".choice").on("click", function () {
 		player = options[$(this).data("gg-type")];
 		playerName = $(this).data("gg-type");
 		$(this).appendTo("#lanai");
-		$("#chars > .imgbox").appendTo("#enemies");
+		$(this).css({"background" : "green"})
+		$("#chars >.imgbox").appendTo("#enemies");
 		userChoice = true;
 		playerHp = player.health;
-		playerAttack = player.attack
+		playerAttack = player.attack;
+
 	//pick opponent
 	} else if (userChoice === true && enemyChoice === false) {
 		opponent = options[$(this).data("gg-type")];
 		opponentName = $(this).data("gg-type");
 		$(this).appendTo("#lanaiTwo");
+		$(this).css({"background" : "red"});
 		enemyChoice = true;
 		opponentHp = opponent.health;
+		$("#vs").css({"visibility": "visible"})
 		$("#stat").empty();
 	}
 
@@ -72,57 +79,67 @@ $(".choice").on("click", function () {
 
 //click to attack
 $(".attack").on("click", function () {
-	//continue to attack
-	if (playerHp > 0 && opponentHp > 0) {
-		//change player hp based on opp counter
-		playerHp -= opponent.counter;
 
-		//var hp = 999;
-		//var item = $("div[data-gg-type='dorothy'] span")
-		//item.text("888");
-		//console.log(item);
-		//console.log(item.text());
-		$("#" + playerName+ "").html(playerHp);
+	if (enemyChoice === true) {
 
-		//change opp hp based on player attack
-		opponentHp -= playerAttack;
+	//change player hp based on opp counter
+	playerHp -= opponent.counter;
+	$("#" + playerName+ "").html(playerHp);
 
-		//increase player attack power
-		playerAttack += player.attack;
+	//change opp hp based on player attack
+	opponentHp -= playerAttack;
+	$("#" + opponentName + "").html(opponentHp);
 
-		$("#stat").html("<p>You attacked " + opponentName.toUpperCase() + " for " + playerAttack + " damage.</p>" +
-		"<p>" + opponentName.toUpperCase() + " attacked you back for " + opponent.counter + " damage.</p>")
+	//increase player attack power
+	playerAttack += player.attack;
 
+	$("#stat").html("<p>You attacked " + opponentName.toUpperCase() + " for " + playerAttack + " damage.</p>" +
+	"<p>" + opponentName.toUpperCase() + " attacked you back for " + opponent.counter + " damage.</p>")
 
-	//player won - new opponent
-	} else if (playerHp > 0 && opponentHp <= 0) {
-		//if there are no opponents remaining
-		if (enemyCount === 0) {
-			$("#stat").html("<h2> YOU WIN! </h2>");
-			
-		//if there are opponents remaining	
-		} else {	
-			$("#stat").html("<p>You beat " + opponentName.toUpperCase() + ". Pick a new opponent!</p>");
-			$("#lanaiTwo").empty();
-			enemyCount--;
-			console.log(enemyCount);
-			enemyChoice = false;
-
-		//create restart button
-		}
-
-	//opponent won
-	} else if (playerHp < 0 && opponentHp > 0){
-		$("#stat").html("<h2> You Lose! " + opponentName.toUpperCase() + " ate the cheesecake right in front of YOUR FACE!</h2>");
-
+	checkWin();
+	} else {
+		$("#stat").html("<p>Choose an enemy!</p>");
 	}
 
+	})
 
-})
 
 //click to restart 
-$(".restart").on("click", function () {
+$(".reset").on("click", function () {
+	initializeGame();
+	$(".reset").css({"visibility": "hidden"});
+	$(".imgbox").appendTo("#chars");
+	$("#vs").css({"visibility": "hidden"});
+	$("#chars").append(clone);
 
 })
-});
+
+function checkWin () {
+	
+	//player won with no enemies left
+	if (playerHp > 0 && opponentHp <= 0 && enemyCount <= 1) {
+		$("#stat").html("<h2> YOU WIN! </h2>");
+		$("#lanaiTwo > .imgbox").detach();
+		$(".reset").css({"visibility": "visible"});
+		$("#vs").css({"visibility": "hidden"});
+
+
+	//player won with enemies remaining
+	} else if (playerHp > 0 && opponentHp <= 0) {
+		$("#stat").html("<p>You beat " + opponentName.toUpperCase() + ". Pick a new opponent!</p>");
+		$("#lanaiTwo > .imgbox").detach();
+		enemyCount--;
+		enemyChoice = false;
+		$("#vs").css({"visibility": "hidden"});
+
+	//opponent won	
+	} else if (playerHp < 0 && opponentHp > 0) {
+		$("#stat").html("<h2> You Lose! " + opponentName.toUpperCase() + " ate the cheesecake right in front of YOUR FACE!</h2>");
+		$("#vs").css({"visibility": "hidden"});
+	}
+
+}
+
+})
+
 
