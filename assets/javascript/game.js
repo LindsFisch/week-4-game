@@ -2,24 +2,24 @@ $(document).ready(function() {
 
 var options = {
 	blanche: {
-		health: 160,
+		health: 120,
 		attack: 7,
 		counter: 8
 	},
 	sophia: {
-		health: 125,
-		attack: 2,
-		counter: 3
+		health: 105,
+		attack: 10,
+		counter: 5
 	},
 	dorothy: {
-		health: 140,
+		health: 150,
 		attack: 5,
-		counter: 6
+		counter: 15
 	},
 	rose: {
-		health: 95,
-		attack: 10,
-		counter: 2
+		health: 170,
+		attack: 8,
+		counter: 10
 	}
 }
 
@@ -51,7 +51,8 @@ function initializeGame () {
 	$("#dorothy").text(options.dorothy.health);
 	$("#rose").text(options.rose.health);
 	$("#sophia").text(options.sophia.health);
-	$("#blanche").text(options.blanche.health);	
+	$("#blanche").text(options.blanche.health);
+	$("#lanaiTwo").empty();
 
 }
 
@@ -87,7 +88,7 @@ $(".choice").on("click", function () {
 //click to attack
 $(".attack").on("click", function () {
 
-	if (enemyChoice === true) {
+	if (enemyChoice === true && userChoice === true) {
 
 	//change player hp based on opp counter
 	playerHp -= opponent.counter;
@@ -125,16 +126,17 @@ $(".reset").on("click", function () {
 function checkWin () {
 	
 	//player won with no enemies left
-	if (playerHp > 0 && opponentHp <= 0 && enemyCount <= 1) {
+	if (playerHp > 0 && opponentHp <= 0 && enemyCount <= 1 && enemyChoice === true && userChoice === true) {
 		$("#stat").html("<h2> YOU WIN! </h2>");
 		$("#lanaiTwo > .imgbox").detach();
 		$(".reset").css({"visibility": "visible"});
 		$("#vs").css({"visibility": "hidden"});
+		$("#lanaiTwo").html("<img src='assets/images/cheesecake.jpg'>" + "<br>" + "<h3>Your well-deserved CHEESECAKE!</h3>");
 
 
 
 	//player won with enemies remaining
-	} else if (playerHp > 0 && opponentHp <= 0) {
+	} else if (playerHp > 0 && opponentHp <= 0 && enemyChoice === true && userChoice === true) {
 		$("#stat").html("<p>You beat " + opponentName.toUpperCase() + ". Pick a new opponent!</p>");
 		$("#lanaiTwo > .imgbox").detach();
 		enemyCount--;
@@ -142,9 +144,12 @@ function checkWin () {
 		$("#vs").css({"visibility": "hidden"});
 
 	//opponent won	
-	} else if (playerHp < 0 && opponentHp > 0) {
+	} else if (playerHp < 0 && opponentHp > 0 || playerHp < 0 && opponentHp < 0 && userChoice === true) {
 		$("#stat").html("<h2> You Lose! " + opponentName.toUpperCase() + " ate the cheesecake right in front of YOUR FACE!</h2>");
 		$("#vs").css({"visibility": "hidden"});
+		$(".reset").css({"visibility": "visible"});
+		$("#lanai > .choice").detach();
+		userChoice = false;
 	}
 
 }

@@ -1,6 +1,20 @@
+body {
+	background: url("../images/house.jpg");
+	font-family: 'Catamaran', sans-serif;
+	font-weight: bold;
+}
+
+p {
+	font-size: 16px;
+}
+
 header {
 	margin: auto;
 	width: 50%;
+}
+
+h3 {
+	text-align: center;
 }
 
 .character h2, .character p{
@@ -39,4 +53,12 @@ header {
 	visibility: hidden;
 	width: 75px;
 	margin: 75px 5px 0 5px;
+}
+
+.character, .enemy, .arena {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.btn {
+	margin: 15px;
 }
