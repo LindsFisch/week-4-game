@@ -33,7 +33,8 @@ var opponentHp;
 var playerAttack;
 var playerName;
 var opponentName;
-var clone;
+var elem;
+var arr;
 
 
 
@@ -44,7 +45,13 @@ function initializeGame () {
 	opponent = "";
 	enemyCount = 3;
 	$("#stat").empty();
-	clone = $("#rOne").clone();
+	elem = document.getElementsByClassName("choice");
+	arr = jQuery.makeArray(elem);
+	$(".imgbox").css({"background" : "pink"});
+	$("#dorothy").text(options.dorothy.health);
+	$("#rose").text(options.rose.health);
+	$("#sophia").text(options.sophia.health);
+	$("#blanche").text(options.blanche.health);	
 
 }
 
@@ -106,12 +113,13 @@ $(".attack").on("click", function () {
 
 //click to restart 
 $(".reset").on("click", function () {
-	initializeGame();
 	$(".reset").css({"visibility": "hidden"});
 	$(".imgbox").appendTo("#chars");
 	$("#vs").css({"visibility": "hidden"});
-	$("#chars").append(clone);
-
+	for (var i = 0; i < arr.length; i++) {
+		$("#chars").append(arr[i]);
+	}
+	initializeGame();
 })
 
 function checkWin () {
@@ -122,6 +130,7 @@ function checkWin () {
 		$("#lanaiTwo > .imgbox").detach();
 		$(".reset").css({"visibility": "visible"});
 		$("#vs").css({"visibility": "hidden"});
+
 
 
 	//player won with enemies remaining
