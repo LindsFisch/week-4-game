@@ -144,7 +144,7 @@ function checkWin () {
 		$("#vs").css({"visibility": "hidden"});
 
 	//opponent won	
-	} else if (playerHp < 0 && opponentHp > 0 || playerHp < 0 && opponentHp < 0 && userChoice === true) {
+	} else if (playerHp < 0 && opponentHp > 0 || playerHp < 0 && opponentHp <= 0 && userChoice === true) {
 		$("#stat").html("<h2> You Lose! " + opponentName.toUpperCase() + " ate the cheesecake right in front of YOUR FACE!</h2>");
 		$("#vs").css({"visibility": "hidden"});
 		$(".reset").css({"visibility": "visible"});
